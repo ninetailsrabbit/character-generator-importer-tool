@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdf47suvxkr8l"
-path="res://.godot/imported/progress_background_green.png-6d408d66d9d96656254b6aea57ff2db6.ctex"
+uid="uid://ygr4x64xvkg4"
+path="res://.godot/imported/spritesheet_folder_generation.png-1fe77effac54b14a1eabd36443ec1006.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/my_plugin/assets/progress_background_green.png"
-dest_files=["res://.godot/imported/progress_background_green.png-6d408d66d9d96656254b6aea57ff2db6.ctex"]
+source_file="res://images/spritesheet_folder_generation.png"
+dest_files=["res://.godot/imported/spritesheet_folder_generation.png-1fe77effac54b14a1eabd36443ec1006.ctex"]
 
 [params]
 
