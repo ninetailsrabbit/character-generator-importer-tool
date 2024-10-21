@@ -103,12 +103,12 @@ func create_spritesheets_parts_as_resources() -> void:
 	image_format_regex.compile(".png$")
 
 	if DirAccess.dir_exists_absolute(input_folder_parts) and DirAccess.dir_exists_absolute(output_folder_parts):
-		var spritesheets = PluginUtilities.get_files_recursive(input_folder_parts, image_format_regex)
+		var spritesheets = CharacterGeneratorImporterToolPluginUtilities.get_files_recursive(input_folder_parts, image_format_regex)
 		
 		if spritesheets.is_empty():
 			return
 		
-		PluginUtilities.remove_files_recursive(output_folder_parts)
+		CharacterGeneratorImporterToolPluginUtilities.remove_files_recursive(output_folder_parts)
 		DirAccess.make_dir_absolute(output_folder_parts)
 		
 		DirAccess.make_dir_absolute("%s/Adult" % output_folder_parts)
@@ -155,7 +155,7 @@ func create_spritesheets_parts_as_resources() -> void:
 		
 		## We assume that each core has 2 threads
 		var available_threads: int = OS.get_processor_count() * 2
-		var spritesheet_chunks = PluginUtilities.chunk_array(spritesheets, ceil(spritesheets.size() / available_threads))
+		var spritesheet_chunks = CharacterGeneratorImporterToolPluginUtilities.chunk_array(spritesheets, ceil(spritesheets.size() / available_threads))
 		
 		for spritesheet_chunk: Array in spritesheet_chunks:
 			var thread = Thread.new()
@@ -210,19 +210,19 @@ func generate_animations() -> void:
 
 	if _character_spritesheets_are_valid():
 		
-		PluginUtilities.free_children(self)
+		CharacterGeneratorImporterToolPluginUtilities.free_children(self)
 		
 		if not character_spritesheet.is_empty():
 			var sprite_frames: SpriteFrames = create_sprite_frames(character_spritesheet)
 			create_animated_sprite(character_spritesheet, sprite_frames)
 			
 		if not character_spritesheet_folder.is_empty():
-			for spritesheet_path: String in PluginUtilities.get_files_recursive(character_spritesheet_folder, image_format_regex):
+			for spritesheet_path: String in CharacterGeneratorImporterToolPluginUtilities.get_files_recursive(character_spritesheet_folder, image_format_regex):
 				var sprite_frames: SpriteFrames = create_sprite_frames(spritesheet_path)
 				create_animated_sprite(spritesheet_path, sprite_frames)
 				
 		if create_animation_player:
-			for animated_sprite: AnimatedSprite2D in PluginUtilities.find_nodes_of_type(self, AnimatedSprite2D.new()):
+			for animated_sprite: AnimatedSprite2D in CharacterGeneratorImporterToolPluginUtilities.find_nodes_of_type(self, AnimatedSprite2D.new()):
 				create_animation_player_for(animated_sprite)
 			
 	create_spritesheets_parts_as_resources()
@@ -1053,5 +1053,5 @@ func _on_tool_button_pressed(text: String) -> void:
 		"Generate Animations":
 			generate_animations()
 		"Clear Animations":
-			PluginUtilities.free_children(self)
+			CharacterGeneratorImporterToolPluginUtilities.free_children(self)
 #endregion

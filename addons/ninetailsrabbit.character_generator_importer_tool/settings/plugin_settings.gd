@@ -4,7 +4,7 @@ class_name MyPluginSettings extends RefCounted
 const PluginPrefixName: String = "ninetailsrabbit.character_generator_importer_tool" ## The folder name
 const GitRepositoryName: String = "character-generator-importer-tool"
 
-static var PluginName: String = "MyPlugin"
+static var PluginName: String = "CharacterGeneratorImporterTool"
 static var PluginProjectName: String = ProjectSettings.get_setting("application/config/name")
 static var PluginBasePath: String = "res://addons/%s" % PluginPrefixName
 static var PluginLocalConfigFilePath = "%s/plugin.cfg" % PluginBasePath
