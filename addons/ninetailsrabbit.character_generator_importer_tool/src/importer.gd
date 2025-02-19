@@ -56,7 +56,7 @@ enum CharacterType {
 }
 
 
-var current_sprite_size: Vector2 = Vector2(16, 16)
+var current_sprite_size: Vector2i = Vector2i(16, 16)
 var current_sprite_is_kid: bool = false
 
 	
@@ -85,17 +85,17 @@ func detect_sprite_size(spritesheet: Texture2D) -> SpriteSizes:
 		return SpriteSizes.Size32x32
 
 
-func vector_from_sprite_size(sprite_size: SpriteSizes) -> Vector2:
+func vector_from_sprite_size(sprite_size: SpriteSizes) -> Vector2i:
 	match sprite_size:
 		SpriteSizes.Size16x16:
-			return Vector2(16, 16)
+			return Vector2i(16, 16)
 		SpriteSizes.Size32x32:
-			return Vector2(32, 32)
+			return Vector2i(32, 32)
 		SpriteSizes.Size48x48:
-			return Vector2(48, 48)
+			return Vector2i(48, 48)
 			
 		_:
-			return Vector2(32, 32)
+			return Vector2i(32, 32)
 
 
 func create_spritesheets_parts_as_resources() -> void:
@@ -154,8 +154,8 @@ func create_spritesheets_parts_as_resources() -> void:
 		EditorInterface.get_resource_filesystem().scan()
 		
 		## We assume that each core has 2 threads
-		var available_threads: int = OS.get_processor_count() * 2
-		var spritesheet_chunks = CharacterGeneratorImporterToolPluginUtilities.chunk_array(spritesheets, ceil(spritesheets.size() / available_threads))
+		var available_threads: float = OS.get_processor_count() * 2.0
+		var spritesheet_chunks = CharacterGeneratorImporterToolPluginUtilities.chunk_array(spritesheets, spritesheets.size() / available_threads)
 		
 		for spritesheet_chunk: Array in spritesheet_chunks:
 			var thread = Thread.new()
@@ -177,8 +177,8 @@ func create_spritesheets_as_resources(spritesheets: Array = []) -> void:
 		sprite_frames.resource_name = filename.to_pascal_case()
 		var image: CompressedTexture2D = ResourceLoader.load(spritesheet_path, "CompressedTexture2D", ResourceLoader.CACHE_MODE_IGNORE)
 		
-		var sprite_size = vector_from_sprite_size(detect_sprite_size(image))
-		var sprite_size_as_text = "%sx%s" % [sprite_size.x, sprite_size.y]
+		var sprite_size: Vector2i = vector_from_sprite_size(detect_sprite_size(image))
+		var sprite_size_as_text = "%sx%s" % [int(sprite_size.x), int(sprite_size.y)]
 
 		var output_path: String
 		var character_type_folder: String = "%s/%s" % [output_folder_parts, "Kid" if filename.containsn("kid") else "Adult" ]
