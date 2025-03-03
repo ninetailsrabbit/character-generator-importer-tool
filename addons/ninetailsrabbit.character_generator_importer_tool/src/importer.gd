@@ -157,18 +157,14 @@ func create_spritesheets_parts_as_resources() -> void:
 		var available_threads: float = OS.get_processor_count() * 2.0
 		var spritesheet_chunks = CharacterGeneratorImporterToolPluginUtilities.chunk_array(spritesheets, spritesheets.size() / available_threads)
 		
+		## TODO - Find a way to optimize the import of the character generator spritesheet parts
+		## I tried using threads but it left behind some sprisheets parts or they are generated incorrectly
+		## Single thread takes long and could freeze the editor but the final result is the one expected
 		for spritesheet_chunk: Array in spritesheet_chunks:
-			var thread = Thread.new()
-			thread.start(create_spritesheets_as_resources.bind(spritesheet_chunk))
-			finish_thread.call_deferred(thread)
+			create_spritesheets_as_resources(spritesheet_chunk)
 
 		EditorInterface.get_resource_filesystem().scan()
 	
-
-func finish_thread(thread: Thread) -> void:
-	if thread.is_alive:
-		thread.wait_to_finish()
-		
 
 func create_spritesheets_as_resources(spritesheets: Array = []) -> void:
 	for spritesheet_path: String in spritesheets:
