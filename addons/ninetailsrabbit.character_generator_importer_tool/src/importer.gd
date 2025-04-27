@@ -937,7 +937,7 @@ func _get_frame_data_based_on_size(animation: String, sprite_size: SpriteSizes) 
 				SpriteSizes.Size32x32:
 					return {"position": Vector2(0, 384), "size": size_32_default, "loopable": true} 
 				SpriteSizes.Size48x48:
-					return {"position": Vector2(0, 476), "size": size_48_default, "loopable": true}
+					return {"position": Vector2(0, 576), "size": size_48_default, "loopable": true}
 		"walk_with_object":
 			match sprite_size:
 				SpriteSizes.Size16x16:
@@ -985,7 +985,7 @@ func _get_frame_data_based_on_size(animation: String, sprite_size: SpriteSizes) 
 				SpriteSizes.Size32x32:
 					return {"position": Vector2(0, 896), "size": size_32_default, "loopable": false} 
 				SpriteSizes.Size48x48:
-					return {"position": Vector2(0, 1340), "size": size_48_default, "loopable": false}
+					return {"position": Vector2(0, 1344), "size": size_48_default, "loopable": false}
 		"punch_variant":
 			match sprite_size:
 				SpriteSizes.Size16x16:
@@ -1026,7 +1026,7 @@ func _get_frame_data_based_on_size(animation: String, sprite_size: SpriteSizes) 
 				SpriteSizes.Size32x32:
 					return {"position": Vector2(0, 1216), "size": size_32_default, "loopable": true} 
 				SpriteSizes.Size48x48:
-					return {"position": Vector2(0, 1818), "size": size_48_default, "loopable": true}
+					return {"position": Vector2(0, 1824), "size": size_48_default, "loopable": true}
 	return {}
 
 
